@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">DEAM</string>
+    <string name="varTitulo">Mi primera aplicación</string>
+    <string name="nav_menu_home">Incio</string>
+    <string name="nav_menu_denuncia">Denuncia</string>
+    <string name="nav_menu_registro">Registro</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
