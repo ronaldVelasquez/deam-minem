@@ -82,12 +82,12 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_denuncia:
 //                        tvTitulo.setText("Estoy en denuncias");
                         varFragment = new DenunciaFragment();
-                        actionBar.setTitle("Inicio");
+                        actionBar.setTitle("Denuncias");
                         break;
                     case R.id.nav_registro:
 //                        tvTitulo.setText("Estoy en registro");
                         varFragment = new RegisterFragment();
-                        actionBar.setTitle("Inicio");
+                        actionBar.setTitle("Registro");
                         break;
                 }
                 MainActivity.this.getSupportFragmentManager()
