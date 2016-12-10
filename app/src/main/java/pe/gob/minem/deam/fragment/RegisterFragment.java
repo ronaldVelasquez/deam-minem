@@ -1,6 +1,8 @@
 package pe.gob.minem.deam.fragment;
 
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,9 +22,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import pe.gob.minem.deam.adapter.OpcionAdapter;
-import pe.gob.minem.deam.model.OpcionEntity;
 import pe.gob.minem.deam.R;
+import pe.gob.minem.deam.adapter.OpcionAdapter;
+import pe.gob.minem.deam.db.DenunciaContract;
+import pe.gob.minem.deam.db.DenunciasHelper;
+import pe.gob.minem.deam.model.OpcionEntity;
 
 
 /**
@@ -34,18 +38,19 @@ public class RegisterFragment extends Fragment {
     private RadioGroup rgrpDenuncia;
     private CheckBox chbxMotivo1, chbxMotivo2, chbxMotivo3;
     private Spinner spOpcion;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_register, container, false);
         etName = (EditText) view.findViewById(R.id.et_name);
-        etLastName =(EditText) view.findViewById(R.id.et_last_name);
+        etLastName = (EditText) view.findViewById(R.id.et_last_name);
         btnRegistar = (Button) view.findViewById(R.id.btn_registrar);
         rgrpDenuncia = (RadioGroup) view.findViewById(R.id.rgrp_denuncia);
-        chbxMotivo1 =(CheckBox) view.findViewById(R.id.chbx_motivo_1);
-        chbxMotivo2 =(CheckBox) view.findViewById(R.id.chbx_motivo_2);
-        chbxMotivo3 =(CheckBox) view.findViewById(R.id.chbx_motivo_3);
+        chbxMotivo1 = (CheckBox) view.findViewById(R.id.chbx_motivo_1);
+        chbxMotivo2 = (CheckBox) view.findViewById(R.id.chbx_motivo_2);
+        chbxMotivo3 = (CheckBox) view.findViewById(R.id.chbx_motivo_3);
         spOpcion = (Spinner) view.findViewById(R.id.spn_opcion);
         return view;
     }
@@ -65,9 +70,25 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String radioSeleccionado = getOpcionSeleccionada2();
-                Toast.makeText(getActivity(),
-                        radioSeleccionado == null ? "Selecciona una opcion" : radioSeleccionado,
-                        Toast.LENGTH_SHORT).show();
+                if (radioSeleccionado == null) {
+                    Toast.makeText(getActivity(),
+                            "Selecciona una opcion",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    DenunciasHelper denunciasHelper = new DenunciasHelper(getActivity());
+                    SQLiteDatabase db = denunciasHelper.getWritableDatabase();
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put(DenunciaContract.DenunciaEntry.COLUMN_NAME_TITLE, radioSeleccionado);
+                    contentValues.put(DenunciaContract.DenunciaEntry.COLUMN_NAME_DESCRIPTION, radioSeleccionado + " descripcion");
+
+                    long id = db.insert(DenunciaContract.DenunciaEntry.TABLE_NAME, null, contentValues);
+                    if (id != 0) {
+                        Toast.makeText(getActivity(),
+                                "Se agrego un nuevo elemento en la tabla con id :  " + id,
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+
             }
         });
     }
@@ -78,7 +99,7 @@ public class RegisterFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    private String getOpcionSeleccionada () {
+    private String getOpcionSeleccionada() {
         String respuesta = null;
         switch (rgrpDenuncia.getCheckedRadioButtonId()) {
             case R.id.rbtn_denuncia_ambiental:
@@ -96,12 +117,12 @@ public class RegisterFragment extends Fragment {
 
     private String getOpcionSeleccionada2() {
         String resultado = null;
-            for (int i = 0; i < rgrpDenuncia.getChildCount(); i++) {
-                if (rgrpDenuncia.getCheckedRadioButtonId() == rgrpDenuncia.getChildAt(i).getId()) {
-                    resultado = ((RadioButton)rgrpDenuncia.getChildAt(i)).getText().toString();
-                    return resultado;
-                }
+        for (int i = 0; i < rgrpDenuncia.getChildCount(); i++) {
+            if (rgrpDenuncia.getCheckedRadioButtonId() == rgrpDenuncia.getChildAt(i).getId()) {
+                resultado = ((RadioButton) rgrpDenuncia.getChildAt(i)).getText().toString();
+                return resultado;
             }
+        }
         return null;
     }
 }
