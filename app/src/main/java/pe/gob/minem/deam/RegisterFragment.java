@@ -2,24 +2,59 @@ package pe.gob.minem.deam;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class RegisterFragment extends Fragment {
-
+    private EditText etName, etLastName;
+    private Button btnRegistar;
+    private RadioGroup rgrpDenuncia;
+    private CheckBox chbxMotivo1, chbxMotivo2, chbxMotivo3;
+    private Spinner spOpcion;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fragment_register, container, false);
+        View view = inflater.inflate(R.layout.fragment_register, container, false);
+        etName = (EditText) view.findViewById(R.id.et_name);
+        etLastName =(EditText) view.findViewById(R.id.et_last_name);
+        btnRegistar = (Button) view.findViewById(R.id.btn_registrar);
+        rgrpDenuncia = (RadioGroup) view.findViewById(R.id.rgrp_denuncia);
+        chbxMotivo1 =(CheckBox) view.findViewById(R.id.chbx_motivo_1);
+        chbxMotivo2 =(CheckBox) view.findViewById(R.id.chbx_motivo_2);
+        chbxMotivo3 =(CheckBox) view.findViewById(R.id.chbx_motivo_3);
+        spOpcion = (Spinner) view.findViewById(R.id.spn_opcion);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        List<OpcionEntity> list = new ArrayList<>();
+        list.add(new OpcionEntity(1, "Opcion 1", "Descripción de la opción 1"));
+        list.add(new OpcionEntity(2, "Opcion 2", "Descripción de la opción 2"));
+        list.add(new OpcionEntity(3, "Opcion 3", "Descripción de la opción 3"));
+        list.add(new OpcionEntity(4, "Opcion 4", "Descripción de la opción 4"));
+        list.add(new OpcionEntity(5, "Opcion 5", "Descripción de la opción 5"));
+        OpcionAdapter opcionAdapter = new OpcionAdapter(list, getActivity());
+        spOpcion.setAdapter(opcionAdapter);
     }
 
     @Override

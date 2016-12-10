@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="8dp"
         android:orientation="vertical">
 
         <android.support.design.widget.TextInputLayout
@@ -83,23 +84,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="Motivo 1"/>
+            android:text="Motivo 1" />
 
         <CheckBox
             android:id="@+id/chbx_motivo_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="Motivo 2"/>
+            android:text="Motivo 2" />
 
         <CheckBox
             android:id="@+id/chbx_motivo_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Motivo 3"
-            android:layout_marginLeft="20dp" />
+            android:layout_marginLeft="20dp"
+            android:text="Motivo 3" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Elija una opción" />
+
+        <Spinner
+            android:id="@+id/spn_opcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <Button
+            android:id="@+id/btn_registrar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
