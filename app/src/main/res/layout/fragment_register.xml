@@ -39,6 +39,66 @@
                 android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Elgie una opción de denuncia :" />
+
+        <RadioGroup
+            android:id="@+id/rgrp_denuncia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/rbtn_denuncia_ambiental"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:text="Ambiental" />
+
+            <RadioButton
+                android:id="@+id/rbtn_denuncia_territorial"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:text="Territorial" />
+
+            <RadioButton
+                android:id="@+id/rbtn_denuncia_autoridad"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:text="Abuso de autoridad" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Elija los motivos de su denuncia :" />
+
+        <CheckBox
+            android:id="@+id/chbx_motivo_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Motivo 1"/>
+
+        <CheckBox
+            android:id="@+id/chbx_motivo_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Motivo 2"/>
+
+        <CheckBox
+            android:id="@+id/chbx_motivo_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Motivo 3"
+            android:layout_marginLeft="20dp" />
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
