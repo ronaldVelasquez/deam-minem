@@ -1,4 +1,4 @@
-package pe.gob.minem.deam;
+package pe.gob.minem.deam.fragment;
 
 
 import android.os.Bundle;
@@ -19,6 +19,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import pe.gob.minem.deam.adapter.OpcionAdapter;
+import pe.gob.minem.deam.model.OpcionEntity;
+import pe.gob.minem.deam.R;
 
 
 /**

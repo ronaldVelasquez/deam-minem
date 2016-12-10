@@ -1,4 +1,4 @@
-package pe.gob.minem.deam;
+package pe.gob.minem.deam.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,8 +11,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
+
+import pe.gob.minem.deam.fragment.DenunciaFragment;
+import pe.gob.minem.deam.fragment.HomeFragment;
+import pe.gob.minem.deam.R;
+import pe.gob.minem.deam.fragment.RegisterFragment;
 
 public class MainActivity extends AppCompatActivity {
     public static final String USUARIO = "usuario";

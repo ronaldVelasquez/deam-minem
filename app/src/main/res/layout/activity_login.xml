@@ -5,7 +5,7 @@
     android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pe.gob.minem.deam.LoginActivity">
+    tools:context="pe.gob.minem.deam.activity.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

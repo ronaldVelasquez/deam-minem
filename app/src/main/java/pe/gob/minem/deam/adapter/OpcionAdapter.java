@@ -1,4 +1,4 @@
-package pe.gob.minem.deam;
+package pe.gob.minem.deam.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.List;
+
+import pe.gob.minem.deam.R;
+import pe.gob.minem.deam.model.OpcionEntity;
 
 /**
  * Created by ronaldvelasquez on 10/12/16.

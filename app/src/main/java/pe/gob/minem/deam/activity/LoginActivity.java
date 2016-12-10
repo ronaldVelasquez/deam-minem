@@ -1,4 +1,4 @@
-package pe.gob.minem.deam;
+package pe.gob.minem.deam.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import pe.gob.minem.deam.R;
 
 public class LoginActivity extends AppCompatActivity {
     //    Declaracion de variables de vista

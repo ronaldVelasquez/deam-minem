@@ -1,4 +1,4 @@
-package pe.gob.minem.deam;
+package pe.gob.minem.deam.fragment;
 
 
 import android.os.Bundle;
@@ -13,6 +13,10 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import pe.gob.minem.deam.model.DenunciaEntity;
+import pe.gob.minem.deam.R;
+import pe.gob.minem.deam.adapter.RVDenunciaAdapter;
 
 public class DenunciaFragment extends Fragment {
 

@@ -1,4 +1,4 @@
-package pe.gob.minem.deam;
+package pe.gob.minem.deam.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
+
+import pe.gob.minem.deam.R;
+import pe.gob.minem.deam.model.DenunciaEntity;
 
 /**
  * Created by ronaldvelasquez on 10/12/16.

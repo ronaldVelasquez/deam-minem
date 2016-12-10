@@ -1,4 +1,4 @@
-package pe.gob.minem.deam;
+package pe.gob.minem.deam.model;
 
 /**
  * Created by ronaldvelasquez on 10/12/16.
