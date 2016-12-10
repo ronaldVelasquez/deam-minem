@@ -12,8 +12,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +57,15 @@ public class RegisterFragment extends Fragment {
         list.add(new OpcionEntity(5, "Opcion 5", "Descripción de la opción 5"));
         OpcionAdapter opcionAdapter = new OpcionAdapter(list, getActivity());
         spOpcion.setAdapter(opcionAdapter);
+        btnRegistar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String radioSeleccionado = getOpcionSeleccionada2();
+                Toast.makeText(getActivity(),
+                        radioSeleccionado == null ? "Selecciona una opcion" : radioSeleccionado,
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -63,4 +74,30 @@ public class RegisterFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    private String getOpcionSeleccionada () {
+        String respuesta = null;
+        switch (rgrpDenuncia.getCheckedRadioButtonId()) {
+            case R.id.rbtn_denuncia_ambiental:
+                respuesta = "denuncia ambiental";
+                break;
+            case R.id.rbtn_denuncia_autoridad:
+                respuesta = "denuncia autoridad";
+                break;
+            case R.id.rbtn_denuncia_territorial:
+                respuesta = "denuncia territorial";
+                break;
+        }
+        return respuesta;
+    }
+
+    private String getOpcionSeleccionada2() {
+        String resultado = null;
+            for (int i = 0; i < rgrpDenuncia.getChildCount(); i++) {
+                if (rgrpDenuncia.getCheckedRadioButtonId() == rgrpDenuncia.getChildAt(i).getId()) {
+                    resultado = ((RadioButton)rgrpDenuncia.getChildAt(i)).getText().toString();
+                    return resultado;
+                }
+            }
+        return null;
+    }
 }
