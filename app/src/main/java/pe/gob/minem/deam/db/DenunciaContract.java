@@ -12,9 +12,15 @@ public class DenunciaContract {
 
     public static class DenunciaEntry implements BaseColumns {
         public static final String TABLE_NAME = "denuncia";
-        public static final String COLUMN_NAME_ID = "id";
         public static final String COLUMN_NAME_TITLE = "titulo";
         public static final String COLUMN_NAME_DESCRIPTION = "descripcion";
 
+    }
+
+    public static class PersonEntry implements BaseColumns {
+        public static final String TABLE_NAME = "persona";
+        public static final String COLUMN_NAME = "nombre";
+        public static final String COLUMN_LAST_NAME = "apellido";
+        public static final String COLUMN_DNI = "dni";
     }
 }

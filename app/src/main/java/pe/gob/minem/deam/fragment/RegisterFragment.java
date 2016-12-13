@@ -2,6 +2,7 @@ package pe.gob.minem.deam.fragment;
 
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -34,10 +35,12 @@ import pe.gob.minem.deam.model.OpcionEntity;
  */
 public class RegisterFragment extends Fragment {
     private EditText etName, etLastName;
-    private Button btnRegistar;
+    private Button btnRegistar, btnMostrar;
     private RadioGroup rgrpDenuncia;
     private CheckBox chbxMotivo1, chbxMotivo2, chbxMotivo3;
     private Spinner spOpcion;
+    private DenunciasHelper denunciasHelper;
+    private SQLiteDatabase db;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,12 +55,14 @@ public class RegisterFragment extends Fragment {
         chbxMotivo2 = (CheckBox) view.findViewById(R.id.chbx_motivo_2);
         chbxMotivo3 = (CheckBox) view.findViewById(R.id.chbx_motivo_3);
         spOpcion = (Spinner) view.findViewById(R.id.spn_opcion);
+        btnMostrar = (Button) view.findViewById(R.id.btn_mostrar);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        denunciasHelper = new DenunciasHelper(getActivity());
         List<OpcionEntity> list = new ArrayList<>();
         list.add(new OpcionEntity(1, "Opcion 1", "Descripción de la opción 1"));
         list.add(new OpcionEntity(2, "Opcion 2", "Descripción de la opción 2"));
@@ -75,20 +80,42 @@ public class RegisterFragment extends Fragment {
                             "Selecciona una opcion",
                             Toast.LENGTH_SHORT).show();
                 } else {
-                    DenunciasHelper denunciasHelper = new DenunciasHelper(getActivity());
-                    SQLiteDatabase db = denunciasHelper.getWritableDatabase();
+                    db = denunciasHelper.getWritableDatabase();
                     ContentValues contentValues = new ContentValues();
                     contentValues.put(DenunciaContract.DenunciaEntry.COLUMN_NAME_TITLE, radioSeleccionado);
                     contentValues.put(DenunciaContract.DenunciaEntry.COLUMN_NAME_DESCRIPTION, radioSeleccionado + " descripcion");
 
                     long id = db.insert(DenunciaContract.DenunciaEntry.TABLE_NAME, null, contentValues);
-                    if (id != 0) {
+                    if (id != -1) {
                         Toast.makeText(getActivity(),
                                 "Se agrego un nuevo elemento en la tabla con id :  " + id,
                                 Toast.LENGTH_SHORT).show();
                     }
                 }
 
+            }
+        });
+        btnMostrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db = denunciasHelper.getReadableDatabase();
+                String[] columns = {DenunciaContract.DenunciaEntry.COLUMN_NAME_TITLE,
+                        DenunciaContract.DenunciaEntry.COLUMN_NAME_DESCRIPTION};
+                String order = DenunciaContract.DenunciaEntry._ID + " DESC";
+                Cursor cursor = db.query(DenunciaContract.DenunciaEntry.TABLE_NAME,
+                        columns,
+                        null,
+                        null,
+                        null,
+                        null,
+                        order);
+                if (cursor.moveToFirst()) {
+                    Toast.makeText(getContext(),
+                            cursor.getString(cursor.getColumnIndex(DenunciaContract.DenunciaEntry.COLUMN_NAME_TITLE)),
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "No hay datos", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

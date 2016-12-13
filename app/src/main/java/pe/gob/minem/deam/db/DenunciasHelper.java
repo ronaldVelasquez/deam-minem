@@ -22,13 +22,14 @@ public class DenunciasHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "DENUNCIAS";
 
     private static final String TEXT_TYPE = " TEXT";
+    private static final String INT_TYPE = " INTEGER";
     private static final String COMMA_SEP = ",";
-    private static final String SQL_CREATE_ENTRIES =
+    private static final String SQL_CREATE_DENUNCIA =
             "CREATE TABLE " + DenunciaContract.DenunciaEntry.TABLE_NAME + " (" +
-                    DenunciaContract.DenunciaEntry._ID + " INTEGER PRIMARY KEY," +
+                    DenunciaContract.DenunciaEntry._ID + INT_TYPE + " PRIMARY KEY, " +
                     DenunciaContract.DenunciaEntry.COLUMN_NAME_TITLE + TEXT_TYPE + COMMA_SEP +
                     DenunciaContract.DenunciaEntry.COLUMN_NAME_DESCRIPTION + TEXT_TYPE + " )";
-
+    private static final String SQL_CREATE_PERSON = "";
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + DenunciaContract.DenunciaEntry.TABLE_NAME;
 
@@ -38,7 +39,7 @@ public class DenunciasHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL(SQL_CREATE_ENTRIES);
+        sqLiteDatabase.execSQL(SQL_CREATE_DENUNCIA);
     }
 
     @Override
@@ -46,4 +47,5 @@ public class DenunciasHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(SQL_DELETE_ENTRIES);
         onCreate(sqLiteDatabase);
     }
+
 }
