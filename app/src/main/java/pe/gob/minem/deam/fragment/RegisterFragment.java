@@ -35,12 +35,13 @@ import pe.gob.minem.deam.model.OpcionEntity;
  */
 public class RegisterFragment extends Fragment {
     private EditText etName, etLastName;
-    private Button btnRegistar, btnMostrar;
+    private Button btnRegistar, btnMostrar, btnEliminar, btnActualizar;
     private RadioGroup rgrpDenuncia;
     private CheckBox chbxMotivo1, chbxMotivo2, chbxMotivo3;
     private Spinner spOpcion;
     private DenunciasHelper denunciasHelper;
     private SQLiteDatabase db;
+    private int id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,6 +57,8 @@ public class RegisterFragment extends Fragment {
         chbxMotivo3 = (CheckBox) view.findViewById(R.id.chbx_motivo_3);
         spOpcion = (Spinner) view.findViewById(R.id.spn_opcion);
         btnMostrar = (Button) view.findViewById(R.id.btn_mostrar);
+        btnEliminar = (Button) view.findViewById(R.id.btn_eliminar);
+        btnActualizar = (Button) view.findViewById(R.id.btn_actualizar);
         return view;
     }
 
@@ -100,7 +103,8 @@ public class RegisterFragment extends Fragment {
             public void onClick(View view) {
                 db = denunciasHelper.getReadableDatabase();
                 String[] columns = {DenunciaContract.DenunciaEntry.COLUMN_NAME_TITLE,
-                        DenunciaContract.DenunciaEntry.COLUMN_NAME_DESCRIPTION};
+                        DenunciaContract.DenunciaEntry.COLUMN_NAME_DESCRIPTION,
+                        DenunciaContract.DenunciaEntry._ID};
                 String order = DenunciaContract.DenunciaEntry._ID + " DESC";
                 Cursor cursor = db.query(DenunciaContract.DenunciaEntry.TABLE_NAME,
                         columns,
@@ -110,12 +114,36 @@ public class RegisterFragment extends Fragment {
                         null,
                         order);
                 if (cursor.moveToFirst()) {
+                    id = cursor.getInt(cursor.getColumnIndex(DenunciaContract.DenunciaEntry._ID));
                     Toast.makeText(getContext(),
-                            cursor.getString(cursor.getColumnIndex(DenunciaContract.DenunciaEntry.COLUMN_NAME_TITLE)),
+                            cursor.getString(cursor.getColumnIndex(DenunciaContract.DenunciaEntry.COLUMN_NAME_TITLE)) +
+                                    " id : " + id,
                             Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getContext(), "No hay datos", Toast.LENGTH_SHORT).show();
                 }
+                cursor.close();
+            }
+        });
+        btnEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db = denunciasHelper.getWritableDatabase();
+                String where = DenunciaContract.DenunciaEntry._ID + " = " + id;
+                int borrados = db.delete(DenunciaContract.DenunciaEntry.TABLE_NAME, where, null);
+                Toast.makeText(getContext(), borrados >= 1 ? "Borrado exitoso" : "No se borro nada", Toast.LENGTH_SHORT).show();
+            }
+        });
+        btnActualizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db = denunciasHelper.getReadableDatabase();
+                ContentValues values = new ContentValues();
+                values.put(DenunciaContract.DenunciaEntry.COLUMN_NAME_TITLE, "Registro " + id);
+
+                String seleccion = DenunciaContract.DenunciaEntry._ID + " = " + id;
+                int count = db.update(DenunciaContract.DenunciaEntry.TABLE_NAME, values, seleccion, null);
+                Toast.makeText(getContext(), count >= 1 ? "Registro actualizado" : "No se actualizo el registro", Toast.LENGTH_SHORT).show();
             }
         });
     }

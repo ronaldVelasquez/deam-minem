@@ -149,6 +149,30 @@
             android:text="Mostrar último registro"
             android:textColor="@color/varColorBlanco"
             android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_eliminar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorAccent"
+            android:text="Borrar último registro"
+            android:textColor="@color/varColorBlanco"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_actualizar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorAccent"
+            android:text="Actualizar último registro"
+            android:textColor="@color/varColorBlanco"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </ScrollView>
