@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pe.gob.minem.deam.R;
@@ -18,8 +19,14 @@ import pe.gob.minem.deam.model.DenunciaEntity;
 public class RVDenunciaAdapter extends RecyclerView.Adapter<RVDenunciaAdapter.RVViewHolder> {
     private List<DenunciaEntity> list;
 
-    public RVDenunciaAdapter(List<DenunciaEntity> list) {
-        this.list = list;
+    public RVDenunciaAdapter() {
+        this.list = new ArrayList<>();
+    }
+
+    public void addDenuncias(List<DenunciaEntity> denuncias) {
+        list.clear();  // limpia la lista
+        list.addAll(denuncias); // añade all el parametro a la lista
+        notifyDataSetChanged(); // notifca al adaptador que ha habido cambios en la data y que tiene que refrescarse
     }
 
     @Override

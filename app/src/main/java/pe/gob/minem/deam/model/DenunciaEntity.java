@@ -1,16 +1,23 @@
 package pe.gob.minem.deam.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by ronaldvelasquez on 10/12/16.
  */
 
 public class DenunciaEntity {
+    @SerializedName("id")
     private int id;
+    @SerializedName("titulo")
     private String titulo;
+    @SerializedName("descripcion")
     private String descripcion;
+    @SerializedName("nombre")
     private String nombreDenunciante;
     private String apellidoDenunciante;
-
+    @SerializedName("locacion")
+    private LocationEntity locationEntity;
     public DenunciaEntity(int id, String titulo, String descripcion, String nombreDenunciante, String apellidoDenunciante) {
         this.id = id;
         this.titulo = titulo;
@@ -57,5 +64,13 @@ public class DenunciaEntity {
 
     public void setApellidoDenunciante(String apellidoDenunciante) {
         this.apellidoDenunciante = apellidoDenunciante;
+    }
+
+    public LocationEntity getLocationEntity() {
+        return locationEntity;
+    }
+
+    public void setLocationEntity(LocationEntity locationEntity) {
+        this.locationEntity = locationEntity;
     }
 }

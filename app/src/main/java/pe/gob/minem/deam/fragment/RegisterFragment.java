@@ -29,7 +29,6 @@ import pe.gob.minem.deam.db.DenunciaContract;
 import pe.gob.minem.deam.db.DenunciasHelper;
 import pe.gob.minem.deam.model.OpcionEntity;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
