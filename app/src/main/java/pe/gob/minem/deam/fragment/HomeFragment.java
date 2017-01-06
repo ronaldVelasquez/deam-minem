@@ -1,6 +1,7 @@
 package pe.gob.minem.deam.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import java.util.HashMap;
 
 import pe.gob.minem.deam.R;
+import pe.gob.minem.deam.activity.MapaActivity;
 import pe.gob.minem.deam.rest.ApiClient;
 import pe.gob.minem.deam.rest.response.BaseResponse;
 import retrofit2.Call;
@@ -32,6 +34,7 @@ public class HomeFragment extends Fragment {
     private EditText etTitulo;
     private EditText etDescripcion;
     private Button btnEnviar;
+    private Button btnMapa;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +56,7 @@ public class HomeFragment extends Fragment {
         etTitulo = (EditText) view.findViewById(R.id.et_titulo);
         etDescripcion = (EditText) view.findViewById(R.id.et_descripcion);
         btnEnviar = (Button) view.findViewById(R.id.btn_enviar);
+        btnMapa = (Button) view.findViewById(R.id.btn_mapa);
     }
 
     @Override
@@ -86,6 +90,12 @@ public class HomeFragment extends Fragment {
                         }
                     });
                 }
+            }
+        });
+        btnMapa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().startActivity(new Intent(getActivity(), MapaActivity.class));
             }
         });
     }
